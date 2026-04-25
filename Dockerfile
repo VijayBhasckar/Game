@@ -1,19 +1,20 @@
-FROM node:16-slim AS builder
-WORKDIR /usr/src/app
-COPY . .
-RUN npm install --include=dev
-#
-# Build mode can be set via NODE_ENV environment variable (development or production)
-# See project package.json and webpack.config.js
-#
-ENV NODE_ENV=development
-RUN npm run build
+# Use Node.js base image
+FROM node:18
 
-FROM node:16-slim
-RUN npm install http-server -g
-RUN mkdir /public
-WORKDIR /public
-COPY --from=builder /usr/src/app/dist/ ./
+# Create app directory
+WORKDIR /app
+
+# Copy package files first (for caching)
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy all files
+COPY . .
+
+# Expose port
 EXPOSE 8080
-USER 1000
-CMD ["http-server"]
+
+# Start app
+CMD ["node", "index.js"]
