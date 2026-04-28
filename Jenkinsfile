@@ -6,12 +6,12 @@ pipeline {
     }
 
     environment {
-        DOCKER_USER = "surya8442"
+        DOCKER_USER = "imvijaybhaskar"
         IMAGE_NAME = "sliding-block-puzzle-game"
         IMAGE_TAG = "${BUILD_NUMBER}"
         KUBECONFIG = '/var/lib/jenkins/.kube/config'
-        NEXUS_URL = "http://3.111.169.124:8081/repository/puzzlegame"
-        RECIPIENTS = "suryakandipalli@gmail.com"
+        NEXUS_URL = "http://65.1.136.51:8081/repository/puzzlegame"
+        RECIPIENTS = "vijaybhasckar@gmail.com"
 
         CLUSTER_NAME = "mycluster"
         PROJECT_NAME = "Sliding Puzzle Game"
@@ -21,7 +21,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Surya8442/Game.git'
+                git branch: 'main', url: 'https://github.com/VijayBhasckar/Game.git'
             }
         }
 
